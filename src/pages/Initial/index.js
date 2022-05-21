@@ -1,10 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./initial.css";
 
-function InitialPage(props) {
-    const [bitsArray,setBitsArray] = useState(['/','']);
-    const [currentBitIndex,setCurrentBitIndex] = useState(1);
+import {IoTriangleSharp} from "react-icons/io5"
 
+function InitialPage(props) {
+    const [bitsArray,setBitsArray] = useState([]);
+    const [bitsRefArray,setBitsRefArray] = useState([]);
+    const [currentBitIndex,setCurrentBitIndex] = useState(0);
+    const [previousBitIndex,setPreviousBitIndex] = useState(0);
+    const tapRef = useRef();
+    const tapNeedleRef = useRef();
+
+    useEffect(()=>{
+        (async()=>{
+            setCurrentBitIndex(100);
+        })()
+    },[]);
     const handleBitChange = (e,index)=>{
         setBitsArray((prev)=>{
             let state = [...prev]
@@ -15,9 +26,15 @@ function InitialPage(props) {
         
     }
 
+    useEffect(()=>{
+        setBitsArray(Array.apply(null, {length: 200}).map(Function.call, ()=>""))
+        setBitsRefArray(Array.apply(null, {length: 200}).map(Function.call, ()=>React.createRef()));
+    },[]);
+    
     const moveRight = ()=>{
-        if (bitsArray.length>currentBitIndex)
+        if (bitsArray.length>currentBitIndex+1)
             setCurrentBitIndex((prev)=>prev+1);
+        
     };
 
     const moveLeft = ()=>{
@@ -32,7 +49,7 @@ function InitialPage(props) {
                 state.splice(currentBitIndex+1,0,'');
                 return state
             });
-            moveRight();
+            setCurrentBitIndex((prev)=>prev+1);
         }
     }
 
@@ -54,17 +71,21 @@ function InitialPage(props) {
         name = name.toLowerCase()
         switch(name){
             case 'r':
+                setPreviousBitIndex(currentBitIndex)
                 moveRight();
                 break;
             case 'l':
+                setPreviousBitIndex(currentBitIndex)
                 moveLeft();
                 break;
-            case 'a':
-                add(currentBitIndex);
-                break;
-            case 'd':
-                remove()
-                break;
+            // case 'a':
+            //     setPreviousBitIndex(currentBitIndex)
+            //     add(currentBitIndex);
+            //     break;
+            // case 'd':
+            //     setPreviousBitIndex(currentBitIndex)
+            //     remove()
+            //     break;
             default:
                 break
         }
@@ -77,32 +98,45 @@ function InitialPage(props) {
     },[currentBitIndex,bitsArray]);
 
     useEffect(()=>{
-        if (currentBitIndex>=1){
+        if (currentBitIndex>=0 && currentBitIndex<=200){
             document.getElementById(`bitId${currentBitIndex}`)?.focus()
-        }
-        else{
-            setCurrentBitIndex(1)
-        }
-    },[currentBitIndex])
-    console.log("states",currentBitIndex,bitsArray[-1])
+    }
+    },[currentBitIndex]);
+
+    useEffect(()=>{
+        bitsRefArray[currentBitIndex]?.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+          inline:'center'
+        });
+    },[tapRef,bitsRefArray,currentBitIndex]);
 
     return (
-        <div className='flex h-screen w-screen flex-col items-center justify-center bg-black'>
-            <div className='min-w-screen h-14 bg-gray-400 w-screen flex'>
-                {
-                    bitsArray.map((item,index)=>(
-                        <div key={index} className='h-full w-14 border-r  border-black flex justify-center items-center'>
-                            <input id={`bitId${index}`} type={"text"} onChange={(e)=>handleBitChange(e,index)} className='w-full h-full bg-transparent text-center'  value={item} />
+        <div className='flex h-screen w-screen flex-col items-center justify-center bg-white'>
+            <div className='flex relative w-11/12 overflow-x-scroll scrollDiv flex-col min-w-screen pb-20  justify-center items-center'>
+                <div ref={tapRef} className='h-[60px] bg-gray-400 w-full ml-0 flex '>
+                    {
+                        bitsArray.map((item,index)=>(
+                            <div ref={bitsRefArray[index]} style={{
+                                minWidth:'60px'
+                            }} key={index} className={`h-[60px] w-[60px] border-r-2  border-white flex justify-center bg-gray-400 items-center ${index===0 && 'border-l'}`}>
+                                <input id={`bitId${index}`} type={"text"} onChange={(e)=>handleBitChange(e,index)} className='w-full h-full bg-transparent text-center'  value={item} />
+                            </div>
+                        ))
+                    }
+                </div>
+                    <div className='text-white fixed w-full flex justify-center'>
+                        <div ref={tapNeedleRef} className='transition ease-out duration-700 absolute rounded-t-full mt-4'>
+                            <img src="/images/pointer.png" alt="arrow" className='w-10' />
                         </div>
-                    ))
-                }
+                    </div>
             </div>
             <div className='bg-gray-600 w-11/12 p-5 mt-10 rounded-xl text-white'>
                 <p>KEYS</p>
                 <p>{'R -> move right'}</p>
                 <p>{'L -> move left'}</p>
-                <p>{'A -> add new bit'}</p>
-                <p>{'D -> remove current bit'}</p>
+                {/* <p>{'A -> add new bit'}</p>
+                <p>{'D -> remove current bit'}</p> */}
                 <p>{'/ -> end bit'}</p>
             </div>
         </div>
