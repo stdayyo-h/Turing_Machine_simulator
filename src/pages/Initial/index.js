@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./initial.css";
 
-import {IoTriangleSharp} from "react-icons/io5"
-
 function InitialPage(props) {
     const [bitsArray,setBitsArray] = useState([]);
     const [bitsRefArray,setBitsRefArray] = useState([]);
@@ -16,6 +14,7 @@ function InitialPage(props) {
             setCurrentBitIndex(100);
         })()
     },[]);
+
     const handleBitChange = (e,index)=>{
         setBitsArray((prev)=>{
             let state = [...prev]
@@ -34,12 +33,10 @@ function InitialPage(props) {
     const moveRight = ()=>{
         if (bitsArray.length>currentBitIndex+1)
             setCurrentBitIndex((prev)=>prev+1);
-        
     };
 
-    const moveLeft = ()=>{
-        if (currentBitIndex>1)
-            setCurrentBitIndex((prev)=>prev-1);
+    const moveLeft = () => {
+        if (currentBitIndex > 1) setCurrentBitIndex((prev) => prev - 1);
     };
 
     const add = ()=>{
@@ -52,17 +49,18 @@ function InitialPage(props) {
             setCurrentBitIndex((prev)=>prev+1);
         }
     }
+  
 
-    const remove = async()=>{
-        if (currentBitIndex>1 || (bitsArray.length>3 && currentBitIndex>=1)){
-            setBitsArray((prev)=>{
-                let state = [...prev]
-                state.splice(currentBitIndex,1);
-                return state
-            });
-            moveLeft()
-        }
+  const remove = async () => {
+    if (currentBitIndex > 1 || (bitsArray.length > 3 && currentBitIndex >= 1)) {
+      setBitsArray((prev) => {
+        let state = [...prev];
+        state.splice(currentBitIndex, 1);
+        return state;
+      });
+      moveLeft();
     }
+  };
 
     const handleKeyPress = (e)=>{
         e.preventDefault()
@@ -70,11 +68,13 @@ function InitialPage(props) {
         let code = e.code;
         name = name.toLowerCase()
         switch(name){
-            case 'r':
+            case "r":
+            case "arrowright":
                 setPreviousBitIndex(currentBitIndex)
                 moveRight();
                 break;
-            case 'l':
+            case "l":
+            case "arrowleft":
                 setPreviousBitIndex(currentBitIndex)
                 moveLeft();
                 break;
@@ -89,13 +89,13 @@ function InitialPage(props) {
             default:
                 break
         }
-    }
+    };
 
-    useEffect(()=>{
-        document.body.addEventListener('keyup',handleKeyPress);
+  useEffect(() => {
+    document.body.addEventListener("keyup", handleKeyPress);
 
-        return ()=> document.body.removeEventListener('keyup',handleKeyPress)
-    },[currentBitIndex,bitsArray]);
+    return () => document.body.removeEventListener("keyup", handleKeyPress);
+  }, [currentBitIndex, bitsArray]);
 
     useEffect(()=>{
         if (currentBitIndex>=0 && currentBitIndex<=200){
