@@ -4,8 +4,8 @@ const is_variable = (word)=>{
     let status="";
     let error_details="";
     
-    console.log(character_array)
-    if (character_array[0].toUpperCase() !== character_array[0].toLowerCase() || character_array[0].codePointAt(0) > 127 ){
+    console.log(character_array,"array")
+    if (character_array[0] && (character_array[0].toUpperCase() !== character_array[0].toLowerCase() || character_array[0].codePointAt(0) > 127 )){
         console.log("here if")
         status="valid";
         error_details="";
