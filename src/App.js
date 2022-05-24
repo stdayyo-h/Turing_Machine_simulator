@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import InitialPage from './pages/Initial';
-import Simulator from './pages/Simulator';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path={"/"} element={<InitialPage />} exact />
-                <Route path={"/simulator"} element={<Simulator />} exact />
               </Routes>
             </BrowserRouter>
           </div>
