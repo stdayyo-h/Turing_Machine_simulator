@@ -6,7 +6,6 @@ export const moveRight = (bitsArray,currentBitIndex,setCurrentBitIndex) => {
   };
 
   export const moveLeft = (currentBitIndex,setCurrentBitIndex,) => {
-        console.log("move left fn")
         if (currentBitIndex > 1) {setCurrentBitIndex((prev) => prev - 1)}
   };
 

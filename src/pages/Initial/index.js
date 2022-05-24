@@ -29,21 +29,17 @@ function Initial(props) {
     let local_sameState=sameState;
     while (local_sameState){
       // go to left most
-      console.log("inside same state",sameState)
       const move_to_left_response = await move_to_left(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray);
       local_currentBitIndex = await move_to_left_response;
 
       const mark_left_bit_response = await mark_left_bit(setQLeftState,local_currentBitIndex,bitsArray,local_bitsArray,setCurrentStateShow,setBitsArray);
       local_bitsArray = mark_left_bit_response.local_bitsArray;
-      console.log("mark left",mark_left_bit_response);
 
       const move_to_right_response = await move_to_right(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray);
       local_currentBitIndex = await move_to_right_response;
-      console.log("right",move_to_right_response)
 
       const mark_right_bit_response = await mark_right_bit(setQRightState,local_currentBitIndex,bitsArray,local_bitsArray,setCurrentStateShow,setBitsArray);
       local_bitsArray=mark_right_bit_response.local_bitsArray;
-      console.log("mark right",mark_right_bit_response);
 
       if (mark_left_bit_response.state!==mark_right_bit_response.state){
         local_sameState=false;
@@ -53,7 +49,6 @@ function Initial(props) {
         setIsPalindrome(true);
         setMessage("Palindrome");
         local_sameState=false;
-        console.log("palindrome");
         setCurrentStateShow("");
       }
 
@@ -68,7 +63,6 @@ function Initial(props) {
     }else{
       // 
       setSameState(false)
-      console.log("not palindrome")
     }
   }
   },[qLeftState,qRightState]);
