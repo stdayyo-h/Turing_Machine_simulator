@@ -52,8 +52,7 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
       if (
         (e.target.value === "0" ||
           e.target.value === "1" ||
-          e.target.value === "" ||
-          e.target.value === "/") &&
+          e.target.value === "") &&
         index !== 0
       )
         state[index] = e.target.value;
