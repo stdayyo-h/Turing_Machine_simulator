@@ -9,14 +9,21 @@ function Initial(props) {
   const [bitsArray, setBitsArray] = useState([]);
   const [currentBitIndex, setCurrentBitIndex] = useState(0);
 
+  const [leftMostBitIndex,setLeftMostBitIndex] = useState(100);
+  const [RightMostBitIndex,setRightMostBitIndex] = useState(100);
+
   const [qLeftState,setQLeftState] = useState(null);
   const [qRightState,setQRightState] = useState(null);
 
   const [sameState,setSameState] = useState(true);
   const [isPalindrome,setIsPalindrome] = useState(false);
 
+  const [message,setMessage] = useState("");
+
   const check_palindrome = async() => {
     setIsPalindrome(false);
+    setMessage("");
+
     let local_currentBitIndex = currentBitIndex;
     let local_bitsArray = bitsArray;
     let local_sameState=sameState;
@@ -41,8 +48,10 @@ function Initial(props) {
       if (mark_left_bit_response.state!==mark_right_bit_response.state){
         local_sameState=false;
         setCurrentStateShow("");
+        setMessage("Not palindrome");
       }else if (mark_left_bit_response.bit_index===mark_right_bit_response.bit_index){
         setIsPalindrome(true);
+        setMessage("Palindrome");
         local_sameState=false;
         console.log("palindrome");
         setCurrentStateShow("");
@@ -62,10 +71,20 @@ function Initial(props) {
       console.log("not palindrome")
     }
   }
-},[qLeftState,qRightState]);
+  },[qLeftState,qRightState]);
+
+  useEffect(()=>{
+    if (currentBitIndex>RightMostBitIndex)
+      setRightMostBitIndex(currentBitIndex);
+    if (currentBitIndex<leftMostBitIndex)
+      setLeftMostBitIndex(currentBitIndex)
+  },[currentBitIndex]);
   return (
     <div className='w-screen overflow-x-hidden flex flex-col items-center mt-28'>
       <Simulator currentStateShow={currentStateShow} bitsArray={bitsArray} setBitsArray={setBitsArray} currentBitIndex={currentBitIndex} setCurrentBitIndex={setCurrentBitIndex} />
+      {message && message.length>0 &&
+        <p>{message}</p>
+      }
       <button onClick={check_palindrome} className='bg-gray-600 text-white px-3 py-2 rounded-xl my-5'>
         play
       </button>
