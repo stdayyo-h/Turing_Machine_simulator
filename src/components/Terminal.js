@@ -14,11 +14,13 @@ const Terminal = ({ qLeftState, qRightState, cycle, history, setHistory }) => {
 
     console.log(history)
     return (
-        <div className='bg-black w-11/12 p-5 rounded-xl text-white'>
+        <div className='bg-black w-full p-5 pt-1 text-gray-500 h-44 text-sm rounded-b-md overflow-y-scroll scrollDiv'>
+            <p className='mb-3'>//OUTPUT</p>
+            
             {history.map((item, index) => (
                 item !== undefined &&
                 <div className='w-full flex items-center'>
-                    <p>cycle:{item?.cycle !== undefined && item.cycle}</p>
+                    <p>//cycle:{item?.cycle !== undefined && item.cycle}</p>
                     <p className='mr-5 ml-2 opacity-40'>||</p>
                     <p> {item?.qLeftState}</p>
                     <p>{item?.qLeftState !== null && "=="}</p>

@@ -53,10 +53,10 @@ function Initial(props) {
             if (mark_left_bit_response.state !== mark_right_bit_response.state) {
                 local_sameState = false;
                 setCurrentStateShow("");
-                setMessage("Not palindrome");
+                setMessage("Not a palindrome");
             } else if (mark_left_bit_response.bit_index === mark_right_bit_response.bit_index) {
                 setIsPalindrome(true);
-                setMessage("Palindrome");
+                setMessage("Is a Palindrome");
                 local_sameState = false;
                 setCurrentStateShow("");
             }
@@ -83,19 +83,23 @@ function Initial(props) {
             setLeftMostBitIndex(currentBitIndex)
     }, [currentBitIndex]);
     return (
-        <div className='w-screen overflow-x-hidden flex flex-col items-center mt-28'>
+        <div className='w-screen overflow-x-hidden flex flex-col items-center'>
+            <div className='w-full relative flex justify-center items-center h-64 mb-28'>
+                <p className='font-bold text-5xl'>TURING MACHINE</p>
+                <div className='w-1/2 rounded-bl-md lg:w-1/4 bg-black text-gray-500 absolute top-0 right-0 flex flex-col justify-end h-full'>
+                    <Terminal history={history} setHistory={setHistory} qLeftState={qLeftState} qRightState={qRightState} cycle={cycle} />
+                    <p>-----------------------------------------------------------</p>
+                    <p className='px-3 pb-2 m-0 uppercase text-sm font-semibold'>State : {currentStateShow}</p>
+                </div>
+
+            </div>
             <Simulator currentStateShow={currentStateShow} bitsArray={bitsArray} setBitsArray={setBitsArray} currentBitIndex={currentBitIndex} setCurrentBitIndex={setCurrentBitIndex} />
-            {message && message.length > 0 &&
-                <p>{message}</p>
-            }
-            <button onClick={check_palindrome} className='bg-gray-600 text-white px-3 py-2 rounded-xl my-5'>
+            <button onClick={check_palindrome} className='bg-gray-600 text-white px-9 uppercase py-2 rounded-md my-5'>
                 play
             </button>
-            {
-                isPalindrome &&
-                <p>Palindrome</p>
+            {message && message.length > 0 &&
+                <p className='uppercase font-semibold'>{message}</p>
             }
-            <Terminal history={history} setHistory={setHistory} qLeftState={qLeftState} qRightState={qRightState} cycle={cycle} />
         </div>
     );
 }

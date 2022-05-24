@@ -94,8 +94,8 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
   // qRight1,qRight0,qLeft1,qLeft0,qSearchR1,qSearchL1,qSearchL0,qSearchL0
 
   return (
-    <div className="flex w-full flex-col items-center justify-center bg-white">
-      <div className="flex relative w-11/12 overflow-x-scroll scrollDiv flex-col min-w-screen pb-20  justify-center items-center">
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="flex relative w-11/12 overflow-x-scroll scrollDiv bg-transparent flex-col min-w-screen pb-20  justify-center items-center">
         <div ref={tapRef} className="h-[60px] bg-gray-400 w-full ml-0 flex ">
           {bitsArray?.map((item, index) => (
             <div
@@ -127,19 +127,6 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
           </div>
         </div>
       </div>
-      <div className="p-4">
-        <p className="bg-gray-600  p-5 mt-10 rounded-xl text-white">
-          Current State : {currentStateShow}
-        </p>
-      </div>
-      {/* <div className="bg-gray-600 w-11/12 p-5 mt-10 rounded-xl text-white">
-        <p>KEYS</p>
-        <p>{"R -> move right"}</p>
-        <p>{"L -> move left"}</p>
-        <p>{"A -> add new bit"}</p>
-        <p>{"D -> remove current bit"}</p>
-        <p>{"/ -> end bit"}</p>
-      </div> */}
     </div>
   );
 }
