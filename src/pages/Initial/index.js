@@ -34,21 +34,25 @@ function Initial(props) {
         let local_currentBitIndex = currentBitIndex;
         let local_bitsArray = bitsArray;
         let local_sameState = true;
+        let local_searchingForBit="";
         while (local_sameState) {
             // go to left most
             setCycle((cycle) => cycle + 1);
 
-            const move_to_left_response = await move_to_left(currentBitIndex, setCurrentStateShow, setCurrentBitIndex, local_currentBitIndex, bitsArray, local_bitsArray);
+            const move_to_left_response = await move_to_left(currentBitIndex, setCurrentStateShow, setCurrentBitIndex, local_currentBitIndex, bitsArray, local_bitsArray,local_searchingForBit);
             local_currentBitIndex = await move_to_left_response;
 
             const mark_left_bit_response = await mark_left_bit(setQLeftState, local_currentBitIndex, bitsArray, local_bitsArray, setCurrentStateShow, setBitsArray);
             local_bitsArray = mark_left_bit_response.local_bitsArray;
+            local_searchingForBit = mark_left_bit_response.state;
 
-            const move_to_right_response = await move_to_right(currentBitIndex, setCurrentStateShow, setCurrentBitIndex, local_currentBitIndex, bitsArray, local_bitsArray);
+            const move_to_right_response = await move_to_right(currentBitIndex, setCurrentStateShow, setCurrentBitIndex, local_currentBitIndex, bitsArray, local_bitsArray,local_searchingForBit);
             local_currentBitIndex = await move_to_right_response;
 
             const mark_right_bit_response = await mark_right_bit(setQRightState, local_currentBitIndex, bitsArray, local_bitsArray, setCurrentStateShow, setBitsArray);
             local_bitsArray = mark_right_bit_response.local_bitsArray;
+            local_searchingForBit = "";
+
 
             if (mark_left_bit_response.state !== mark_right_bit_response.state) {
                 local_sameState = false;

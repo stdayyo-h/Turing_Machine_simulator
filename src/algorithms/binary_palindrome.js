@@ -1,8 +1,8 @@
 import { moveLeft, moveRight } from "../components/simulator/simulator_functions";
 
-export const move_to_left =(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray)=>{
+export const move_to_left =(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray,local_searchingForBit)=>{
     return new Promise((resolve,reject)=>{
-        setCurrentStateShow("qLeft");
+        setCurrentStateShow(`qSearching ${local_searchingForBit}`);
         var move_left_interval =setInterval(()=>{
             moveLeft(currentBitIndex,setCurrentBitIndex);
             local_currentBitIndex-=1;
@@ -18,9 +18,9 @@ export const move_to_left =(currentBitIndex,setCurrentStateShow,setCurrentBitInd
         },1000);
     })
 }
-export const move_to_right =(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray)=>{
+export const move_to_right =(currentBitIndex,setCurrentStateShow,setCurrentBitIndex,local_currentBitIndex,bitsArray,local_bitsArray,local_searchingForBit)=>{
     return new Promise((resolve,reject)=>{
-        setCurrentStateShow("qRight");
+        setCurrentStateShow(`qSearching ${local_searchingForBit}`);
         var move_left_interval =setInterval(()=>{
             
             moveRight(local_bitsArray,currentBitIndex,setCurrentBitIndex);
@@ -40,7 +40,7 @@ export const move_to_right =(currentBitIndex,setCurrentStateShow,setCurrentBitIn
 
 export const mark_left_bit =(setQLeftState,local_currentBitIndex,bitsArray,local_bitsArray,setCurrentStateShow,setBitsArray)=>{
     return new Promise((resolve,reject)=>{
-        setCurrentStateShow("qStore and mark");
+        setCurrentStateShow(bitsArray[local_currentBitIndex]==='1'?"qStore 1":'qStore 0');
         setQLeftState(bitsArray[local_currentBitIndex]);
         setBitsArray((prev) => {
             let state = [...prev];
@@ -57,7 +57,7 @@ export const mark_left_bit =(setQLeftState,local_currentBitIndex,bitsArray,local
 }
 export const mark_right_bit =(setQRightState,local_currentBitIndex,bitsArray,local_bitsArray,setCurrentStateShow,setBitsArray)=>{
     return new Promise((resolve,reject)=>{
-        setCurrentStateShow("qStore and mark");
+        setCurrentStateShow(bitsArray[local_currentBitIndex]==='1'?"qStore 1":'qStore 0');
         setQRightState(bitsArray[local_currentBitIndex]);
         setBitsArray((prev) => {
             let state = [...prev];
