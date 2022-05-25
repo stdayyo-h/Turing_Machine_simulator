@@ -36,7 +36,7 @@ function Initial(props) {
         let local_sameState = true;
         let local_searchingForBit="";
         while (local_sameState) {
-            // go to left most
+
             setCycle((cycle) => cycle + 1);
 
             const move_to_left_response = await move_to_left(currentBitIndex, setCurrentStateShow, setCurrentBitIndex, local_currentBitIndex, bitsArray, local_bitsArray,local_searchingForBit);
@@ -88,8 +88,9 @@ function Initial(props) {
     }, [currentBitIndex]);
     return (
         <div className='w-screen overflow-x-hidden flex flex-col items-center'>
-            <div className='w-full relative flex justify-center items-center h-64 mb-28'>
+            <div className='w-full relative flex flex-col justify-center items-center h-64 mb-28'>
                 <p className='font-bold text-5xl'>TURING MACHINE</p>
+                <p className='font-bold '>*to check binary palindrome</p>
                 <div className='w-1/2 rounded-bl-md lg:w-1/4 bg-black text-gray-500 absolute top-0 right-0 flex flex-col justify-end h-full'>
                     <Terminal history={history} setHistory={setHistory} qLeftState={qLeftState} qRightState={qRightState} cycle={cycle} />
                     <p>-----------------------------------------------------------</p>
