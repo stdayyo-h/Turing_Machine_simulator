@@ -7,7 +7,10 @@ module.exports = {
       transitionDuration: {
         '0': '0ms',
         '2000': '2000ms',
-       }
+       },
+       fontFamily: {
+        'press-start': ['"Press Start 2P"', 'cursive']
+      }
     },
   },
   plugins: [],
