@@ -96,7 +96,7 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex relative w-11/12 overflow-x-scroll scrollDiv bg-transparent flex-col min-w-screen pb-20  justify-center items-center">
-        <div ref={tapRef} className="h-[60px] bg-gray-400 w-full ml-0 flex ">
+        <div ref={tapRef} className="h-[60px] w-full ml-0 flex ">
           {bitsArray?.map((item, index) => (
             <div
               ref={bitsRefArray[index]}
@@ -104,7 +104,7 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
                 minWidth: "60px",
               }}
               key={index}
-              className={`h-[60px] w-[60px] border-r-2  border-white flex justify-center bg-gray-400 items-center ${
+              className={`h-[60px] w-[60px] mr-1 flex justify-center bg-gray-400 items-center ${
                 index === 0 && "border-l"
               }`}
             >

@@ -14,7 +14,7 @@ const Terminal = ({ qLeftState, qRightState, cycle, history, setHistory }) => {
 
     console.log(history)
     return (
-        <div className='bg-black w-full p-5 pt-1 text-gray-500 h-44 text-sm rounded-b-md overflow-y-scroll scrollDiv'>
+        <div className='bg-black z-20 w-full p-5 pt-1 text-gray-500 h-44 text-sm rounded-b-md overflow-y-scroll scrollDiv'>
             <p className='mb-3'>//OUTPUT</p>
             
             {history.map((item, index) => (

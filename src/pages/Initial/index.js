@@ -87,14 +87,12 @@ function Initial(props) {
             setLeftMostBitIndex(currentBitIndex)
     }, [currentBitIndex]);
     return (
-        <div className='font-press-start items-center bg-cover w-screen h-screen text-gray-200' style={{ 
-            backgroundImage: `url("https://wallpapercave.com/wp/wp4462138.jpg")` 
-          }}>
-          
+        <div className='font-press-start items-center bg-cover w-screen h-screen text-gray-200 overflow-x-hidden'>
+        <img className='absolute z-0 top-0 left-0 min-w-[200vw] h-screen' src={"https://wallpapercave.com/wp/wp4462138.jpg"} />
         <div className='w-screen flex flex-col overflow-x-hidden '>
             <div className='w-full relative flex flex-col justify-center items-center h-64'>
-                <p className='text-5xl '>TURING MACHINE</p>
-                <p className='font-bold '>*to check binary palindrome</p>
+                <p className='text-4xl '>TURING MACHINE</p>
+                <p className='font-bold text-sm'>*to check binary palindrome</p>
             </div>
             <Simulator currentStateShow={currentStateShow} bitsArray={bitsArray} setBitsArray={setBitsArray} currentBitIndex={currentBitIndex} setCurrentBitIndex={setCurrentBitIndex} />
         </div>
@@ -103,9 +101,9 @@ function Initial(props) {
                 play
             </button>            
             {message && message.length > 0 &&
-                <p className='uppercase font-semibold'>{message}</p>
+                <p className='uppercase font-semibold z-20'>{message}</p>
             }
-            <div className='w-1/2 rounded-bl-md lg:w-3/4 bg-black text-gray-500'>
+            <div className='w-1/2 z-20 rounded-bl-md lg:w-3/4 bg-black text-gray-500'>
                 <Terminal history={history} setHistory={setHistory} qLeftState={qLeftState} qRightState={qRightState} cycle={cycle} />
                     <p className='ml-11'>-------------</p>
                     <p className='px-3 pb-2 m-0 uppercase text-sm font-semibold'>State : {currentStateShow}</p>
