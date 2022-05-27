@@ -94,7 +94,7 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
   // qRight1,qRight0,qLeft1,qLeft0,qSearchR1,qSearchL1,qSearchL0,qSearchL0
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center ">
       <div className="flex relative w-11/12 overflow-x-scroll scrollDiv bg-transparent flex-col min-w-screen pb-20  justify-center items-center">
         <div ref={tapRef} className="h-[60px] w-full ml-0 flex ">
           {bitsArray?.map((item, index) => (
@@ -121,7 +121,7 @@ function Simulator({currentStateShow,bitsArray,setBitsArray,currentBitIndex,setC
         <div className="text-white fixed w-full flex justify-center">
           <div
             ref={tapNeedleRef}
-            className="transition ease-out duration-700 absolute rounded-t-full mt-4"
+            className="transition ease-out duration-700 absolute rounded-t-full mt-4 "
           >
             <img src="/images/pointer.png" alt="arrow" className="w-10" />
           </div>

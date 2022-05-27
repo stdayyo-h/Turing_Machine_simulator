@@ -87,8 +87,8 @@ function Initial(props) {
             setLeftMostBitIndex(currentBitIndex)
     }, [currentBitIndex]);
     return (
-        <div className='font-press-start items-center bg-cover w-screen h-screen text-gray-200 overflow-x-hidden'>
-        <img className='absolute z-0 top-0 left-0 min-w-[200vw] h-screen' src={"https://wallpapercave.com/wp/wp4462138.jpg"} />
+        <div className='font-press-start items-center bg-covnpm er w-screen h-screen text-gray-200 overflow-x-hidden bg-gray-800'>
+        <img className='absolute z-0 top-0 left-0 min-w-[200vw] h-screen' src={"/images/bg.png"} />
         <div className='w-screen flex flex-col overflow-x-hidden '>
             <div className='w-full relative flex flex-col justify-center items-center h-64'>
                 <p className='text-4xl '>TURING MACHINE</p>
@@ -105,7 +105,7 @@ function Initial(props) {
             }
             <div className='w-1/2 z-20 rounded-bl-md lg:w-3/4 bg-black text-gray-500'>
                 <Terminal history={history} setHistory={setHistory} qLeftState={qLeftState} qRightState={qRightState} cycle={cycle} />
-                    <p className='ml-11'>-------------</p>
+                    <p className='ml-6'>-------------</p>
                     <p className='px-3 pb-2 m-0 uppercase text-sm font-semibold'>State : {currentStateShow}</p>
             </div>
         </div>
